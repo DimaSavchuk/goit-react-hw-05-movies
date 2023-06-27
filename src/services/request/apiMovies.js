@@ -1,6 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { BASE_URL, API_KEY, LANG } from 'services/constants';
-import { buildUrl } from 'services/search';
 
 export const MovieApi = createApi({
   reducerPath: 'movieApi',
@@ -11,8 +10,8 @@ export const MovieApi = createApi({
     }),
 
     getSearch: builder.query({
-      query: params =>
-        buildUrl(`search/movie?api_key=${API_KEY}&language=${LANG}`, params),
+      query: ({ query }) =>
+        `/search/movie?query=${query}&api_key=${API_KEY}&language=${LANG}`,
     }),
 
     getMovieDetails: builder.query({

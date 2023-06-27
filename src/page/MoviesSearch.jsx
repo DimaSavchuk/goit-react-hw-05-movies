@@ -12,10 +12,18 @@ const MoviesSearch = () => {
 
   const handleSearch = value => {
     setSearchValue(value);
+    updateURLQuery(value);
+  };
+
+  const updateURLQuery = value => {
+    const params = new URLSearchParams(window.location.search);
+    params.set('query', value);
+    const newUrl = `${window.location.pathname}?${params.toString()}`;
+    window.history.replaceState({}, '', newUrl);
   };
 
   const { data, isLoading, isError } = useGetSearchQuery({
-    query: searchValue,
+    query: searchValue || '',
   });
 
   const { results } = data || {};
