@@ -22,8 +22,6 @@ const Movies = () => {
   const location = useLocation();
   const goBackLink = location?.state?.from ?? ROUTES.HOME;
 
-  console.log(goBackLink);
-
   return (
     <Section>
       <Container>

@@ -14,6 +14,8 @@ import {
   GanresItem,
 } from './AboutMovie.styled';
 
+import PropTypes from 'prop-types';
+
 const AboutMovie = ({ movie }) => {
   const {
     title,
@@ -75,3 +77,7 @@ const AboutMovie = ({ movie }) => {
 };
 
 export default AboutMovie;
+
+AboutMovie.propTypes = {
+  movie: PropTypes.object.isRequired,
+};

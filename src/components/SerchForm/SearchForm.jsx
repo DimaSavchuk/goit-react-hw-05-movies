@@ -6,6 +6,8 @@ import {
   SearchFormInput,
 } from './SearchForm.styled';
 
+import PropTypes from 'prop-types';
+
 const SearchForm = ({ onSubmit }) => {
   const [searchInput, setSearchInput] = useState('');
 
@@ -38,3 +40,7 @@ const SearchForm = ({ onSubmit }) => {
 };
 
 export default SearchForm;
+
+SearchForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};

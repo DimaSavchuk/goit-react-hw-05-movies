@@ -13,6 +13,8 @@ import {
 import { ROUTES } from 'services/routes';
 import { useLocation } from 'react-router-dom';
 
+import PropTypes from 'prop-types';
+
 const MoviesList = ({ movies }) => {
   const location = useLocation();
   console.log(location);
@@ -47,3 +49,7 @@ const MoviesList = ({ movies }) => {
 };
 
 export default MoviesList;
+
+MoviesList.propTypes = {
+  movies: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
