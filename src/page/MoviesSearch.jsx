@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Section, Container } from './Page.styled';
 
 import { useGetSearchQuery } from 'services/request/apiMovies';
@@ -6,9 +6,17 @@ import { useGetSearchQuery } from 'services/request/apiMovies';
 import Loading from 'components/Loading/Loading';
 import MoviesList from 'components/MoviesList/MoviesList';
 import SearchForm from 'components/SerchForm/SearchForm';
+import { useSearchParams } from 'react-router-dom';
 
 const MoviesSearch = () => {
   const [searchValue, setSearchValue] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [query, setQuery] = useState('');
+
+  useEffect(() => {
+    const queryFromParams = searchParams.get('query') ?? '';
+    setQuery(queryFromParams);
+  }, [searchParams]);
 
   const handleSearch = value => {
     setSearchValue(value);
@@ -16,14 +24,11 @@ const MoviesSearch = () => {
   };
 
   const updateURLQuery = value => {
-    const params = new URLSearchParams(window.location.search);
-    params.set('query', value);
-    const newUrl = `${window.location.pathname}?${params.toString()}`;
-    window.history.replaceState({}, '', newUrl);
+    setSearchParams({ query: value });
   };
 
   const { data, isLoading, isError } = useGetSearchQuery({
-    query: searchValue || '',
+    query: searchValue || query || '',
   });
 
   const { results } = data || {};
